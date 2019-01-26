@@ -39,7 +39,7 @@ gem 'dotenv-rails'
 
 gem 'fog'
 
-gem 'rakuten_web_service'
+gem 'amazon-ecs'
 
 source 'https://rubygems.org'
 ruby '2.5.1'
