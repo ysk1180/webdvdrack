@@ -1,0 +1,89 @@
+<div class='wrap'>
+  <div class="preview">
+    <%= image_tag 'dvdrack.png', width: 315 %>
+    <span class="title_preview">
+    </span>
+    <span class="img1" data-title="">
+      <a href="" target="_blank" id="preview_url1">
+        <img src="" id="preview_image1" width="75px">
+      </a>
+    </span>
+    <span class="img2" data-title="">
+      <a href="" target="_blank" id="preview_url2">
+        <img src="" id="preview_image2" width="75px">
+      </a>
+    </span>
+    <span class="img3" data-title="">
+      <a href="" target="_blank" id="preview_url3">
+        <img src="" id="preview_image3" width="75px">
+      </a>
+    </span>
+    <span class='delete1 fa-stack' style='display: none;'>
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+    </span>
+    <span class='delete2 fa-stack' style='display: none;'>
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+    </span>
+    <span class='delete3 fa-stack' style='display: none;'>
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+    </span>
+  </div>
+</div>
+
+<div id='confirmation-button' style='display: none;'>
+  <button id="save-button"><i class="fa fa-check fa-fw"></i>DVDラックをシェアする</button>
+</div>
+
+<%= form_with(model: @post) do |form| %>
+  <div class='form'>
+    <div class="form-row dvd-name">
+      <div class="form-group col-3 form-text">
+        映画名
+      </div>
+      <div class="form-group col-8">
+        <%= form.text_area :keyword, id: :keyword, class:'form-control', rows:"1" %>
+      </div>
+      <div class="form-group col-1 search" id='search'>
+        <i class="fa fa-search fa-lg"></i>
+      </div>
+    </div>
+    <div id="display"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-3 form-text">
+        タイトル
+      </div>
+      <div class="form-group col-8">
+        <%= form.text_area :title, id: :title, value: 'お気に入りの映画', class:'form-control', rows:"1" %>
+      </div>
+      <div class="form-group col-1 search" id='title-ok'>
+        <i class="fa fa-check-square-o fa-lg"></i>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-3 form-text">
+        お名前
+      </div>
+      <div class="form-group col-9">
+        <%= form.text_area :name, id: :name, placeholder: '任意', class:'form-control', rows:"1" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-3 form-text">
+        Twitter ID
+      </div>
+      <div class="form-group col-9">
+        <%= form.text_area :twitter_id, id: :twitter_id, placeholder: '任意 / @は不要です', class:'form-control', rows:"1" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  // 最初にタイトルが表示されるように
+  var content = $("#title").val();
+  $('.title_preview').html(content);
+</script>

@@ -1,0 +1,40 @@
+<% dvds&.each.with_index(1) do |dvd, index| %>
+  <% if dvd[:image].present? %>
+    <div class="item" data-src="<%= dvd[:image] %>" data-url="<%= dvd[:url] %>" data-title="<%= dvd[:title] %>">
+      <div class='item-img'>
+        <%= image_tag dvd[:image], width: '55px', id: "image#{index}" %>
+      </div>
+      <div class='item-title'>
+        <%= dvd[:title] %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<script>
+  // プレビュー表示させるためのメソッド
+  function preview_image(preview_number, url, src, title){
+    $(`#preview_image${preview_number}`).attr("src", src);
+    $(`#preview_url${preview_number}`).attr("href", url);
+    $(`#img${preview_number}`).data("title", title);
+  }
+
+  $(".item").on("click", function () {
+    var number = null;
+    if ($('#preview_image1').attr('src') === ''){
+      number = 1;
+    } else if($('#preview_image2').attr('src') === ''){
+      number = 2;
+    } else {
+      number = 3;
+    }
+    preview_image(number, $(this).data('url'), $(this).data('src'), $(this).data('title'));
+    $(`#display`).css('display','none');
+    $(`.delete${number}`).css("display", '');
+    $('#confirmation-button').css('display','');
+    $('#keyword').val('');
+    if (number ===3) {
+      $('.dvd-name').css('display','none');
+    }
+});
+</script>

@@ -1,0 +1,182 @@
+$(function(){
+  function search(keyword){
+    if (globalTimeout != null) {
+      clearTimeout(globalTimeout);
+    }
+    globalTimeout = setTimeout(function() {
+      globalTimeout = null;
+      // キーワードに入力がないときは検索しないようにする
+      if (keyword === ''){
+        $(`#display`).css('display','none');
+        return false
+      };
+      $.ajax({
+        url: '/search',
+        type: 'GET',
+        // jsonで返してねってこと
+        dataType: 'json',
+        async: true,
+        data: {keyword: keyword},
+      }).done(function(data){
+        $(`#display`).css('display', '');
+        $(`#display`).html(data.content);
+      });
+    }, 700); // 何ms後に検索するか
+  }
+
+  // 入力後一定時間が過ぎた後にajax処理
+  var globalTimeout = null;
+  $('#keyword').keyup(function() {
+    var keyword = $("#keyword").val();
+    search(keyword);
+  });
+
+  // タイトル
+  $('#title').keyup(function(){
+    var content = $("#title").val();
+    $('.title_preview').html(content);
+  });
+  $("#title-ok").on("click", function () {
+    var content = $("#title").val();
+    $('.title_preview').html(content);
+  });
+
+  // 画像削除
+  function delete_image(preview_number){
+    $(`#preview_image${preview_number}`).attr("src", '');
+    $(`#preview_url${preview_number}`).attr("href", '');
+    $(`#img${preview_number}`).data("title", '');
+    $(`.delete${preview_number}`).css("display", 'none');
+    $('.dvd-name').css('display','');
+    if ($(`#preview_image${preview_number + 1}`).attr('src') !== ''){
+      $(`#preview_image${preview_number}`).attr("src", $(`#preview_image${preview_number + 1}`).attr('src'));
+      $(`#preview_url${preview_number}`).attr("href", $(`#preview_url${preview_number + 1}`).attr('href'));
+      $(`#img${preview_number}`).data("title", $(`#img${preview_number + 1}`).data('title'));
+      $(`.delete${preview_number}`).css("display", '');
+      $(`#preview_image${preview_number + 1}`).attr("src", '');
+      $(`#preview_url${preview_number + 1}`).attr("href", '');
+      $(`#img${preview_number + 1}`).data("title", '');
+      $(`.delete${preview_number + 1}`).css("display", 'none');
+      if ($(`#preview_image${preview_number + 2}`).attr('src') !== ''){
+        $(`#preview_image${preview_number + 1}`).attr("src", $(`#preview_image${preview_number + 2}`).attr('src'));
+        $(`#preview_url${preview_number + 1}`).attr("href", $(`#preview_url${preview_number + 2}`).attr('href'));
+        $(`#img${preview_number + 1}`).data("title", $(`#img${preview_number + 2}`).data('title'));
+        $(`.delete${preview_number + 1}`).css("display", '');
+        $(`#preview_image${preview_number + 2}`).attr("src", '');
+        $(`#preview_url${preview_number + 2}`).attr("href", '');
+        $(`#img${preview_number + 2}`).data("title", '');
+        $(`.delete${preview_number + 2}`).css("display", 'none');
+      }
+    }
+  }
+  $('.delete1').on('click', function() {
+    delete_image(1);
+  });
+  $('.delete2').on('click', function() {
+    delete_image(2);
+  });
+  $('.delete3').on('click', function() {
+    delete_image(3);
+  });
+
+  // 画像生成
+  $("#save-button").on("click", function () {
+    // 処理前に Loading 画像を表示
+    dispLoading('本棚作成中...開発者のDVDラックはこんな感じです');
+
+    var title1 = $('#img1').data('title');
+    var image1 = $('#preview_image1').attr('src');
+    var url1 = $('#preview_url1').attr('href');
+    var title2 = $('#img2').data('title');
+    var image2 = $('#preview_image2').attr('src');
+    var url2 = $('#preview_url2').attr('href');
+    var title3 = $('#img3').data('title');
+    var image3 = $('#preview_image3').attr('src');
+    var url3 = $('#preview_url3').attr('href');
+    var title = $('#title').val();
+    var name = $('#name').val();
+    var twitter_id = $('#twitter_id').val();
+
+    $(`.delete1`).css("display", 'none');
+    $(`.delete2`).css("display", 'none');
+    $(`.delete3`).css("display", 'none');
+
+    // 生成する文字列の長さ
+    var l = 8;
+    // 生成する文字列に含める文字セット
+    var c = "abcdefghijklmnopqrstuvwxyz0123456789";
+    var cl = c.length;
+    var hash = "";
+    for(var i=0; i<l; i++){
+      hash += c[Math.floor(Math.random()*cl)];
+    }
+
+    html2canvas($('.preview').get(0), {
+      proxy: true,
+      useCORS: true
+    }).then( function (canvas) {
+      var imgData = canvas.toDataURL();
+
+      $.ajax({
+        url: '/make',
+        type: 'POST',
+        dataType: 'json',
+        async: true,
+        data: {imgData: imgData, hash: hash, title1: title1, image1: image1, url1: url1, title2: title2, image2: image2, url2: url2, title3: title3, image3: image3, url3: url3, title: title, name: name, twitter_id: twitter_id},
+      }).done(function(data){
+        if ($('#preview_image1').attr('src') !== ''){
+          $(`.delete1`).css("display", '');
+          if ($('#preview_image2').attr('src') !== ''){
+            $(`.delete2`).css("display", '');
+            if ($('#preview_image3').attr('src') !== ''){
+              $(`.delete3`).css("display", '');
+            }
+          }
+        }
+        removeLoading();
+        Swal.fire({
+          type: 'success',
+          // title: 'Let\'s BigTweet!',
+          text: '本棚完成！\n↓Let\'s share! ↓',
+          imageUrl: `https://s3-ap-northeast-1.amazonaws.com/webdvdrack-production/images/${hash}.png`,
+          imageWidth: 315,
+          imageAlt: 'Custom image',
+          showConfirmButton: false,
+          showCloseButton: true,
+          footer: `<div class=modal-twitter><a href=https://twitter.com/share?text=%23Web本棚&url=https://webdvdrack.herokuapp.com?h=${hash} class=modal_btn><i class="fa fa-twitter fa-fw"></i>Twitterシェア</a><a href=https://www.facebook.com/sharer/sharer.php?u=https://webdvdrack.herokuapp.com?h=${hash} class=modal_btn-f><i class="fa fa-facebook fa-fw"></i>Facebookシェア</a></div><div class=copy>URLでシェア<input type=text size=40 class=form-control value=https://webdvdrack.herokuapp.com?h=${hash} onfocus=this.select(); readonly></div>`,
+        })
+      }).fail( function(data) {
+        removeLoading();
+        Swal.fire({
+          type: 'error',
+          title: '画像作成に失敗しました...(; ;)',
+          text: 'もう一度ボタンを押してみてください(> <)',
+        })
+      });
+    });
+  });
+
+/* ------------------------------
+ Loading イメージ表示関数
+ 引数： msg 画面に表示する文言
+ ------------------------------ */
+function dispLoading(msg){
+  // 引数なし（メッセージなし）を許容
+  if( msg == undefined ){
+    msg = "";
+  }
+  // 画面表示メッセージ
+  var dispMsg = "<div class='loadingMsg'>" + msg + "</div>";
+  // ローディング画像が表示されていない場合のみ出力
+  if($("#loading").length == 0){
+    $("body").append("<div id='loading'>" + dispMsg + "</div>");
+  }
+}
+
+/* ------------------------------
+ Loading イメージ削除関数
+ ------------------------------ */
+function removeLoading(){
+  $("#loading").remove();
+}
+});
