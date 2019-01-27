@@ -21,6 +21,20 @@ header {
 header h1{
   font-size: 25px;
 }
+footer {
+  padding: 10px 0;
+  margin: 10px 0 0 0;
+  text-align: center;
+  background-color: #2C3133;
+  color: #D8D8D8;
+  font-size: small;
+}
+footer a{
+  color: #D8D8D8;
+}
+footer div{
+  margin: 5px;
+}
 
 .wrap{
   text-align: center;
