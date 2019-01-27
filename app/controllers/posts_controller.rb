@@ -9,7 +9,15 @@ class PostsController < ApplicationController
 
   def make
     generate(to_uploaded(params[:imgData]), params[:hash])
-    # Post.create!(title1: params[:title1], image1: params[:image1], url1: params[:url1], title2: params[:title2], image2: params[:image2], url2: params[:url2], title3: params[:title3], image3: params[:image3], url3: params[:url3], title: params[:title], name: params[:name], twitter_id: params[:twitter_id], h: params[:hash])
+    ActiveRecord::Base.transaction do
+      movie1 = Movie.find_or_create_by(title: params[:title1], url: params[:url1], image: params[:image1])
+      movie2 = Movie.find_or_create_by(title: params[:title2], url: params[:url2], image: params[:image2]) if params[:title2].present?
+      movie3 = Movie.find_or_create_by(title: params[:title3], url: params[:url3], image: params[:image3]) if params[:title3].present?
+      post = Post.create!(title: params[:title], name: params[:name], twitter_id: params[:twitter_id], h: params[:hash])
+      PostMovie.create!(post_id: post.id, movie_id: movie1.id)
+      PostMovie.create!(post_id: post.id, movie_id: movie2.id) if params[:title2].present?
+      PostMovie.create!(post_id: post.id, movie_id: movie3.id) if params[:title3].present?
+    end
     data = []
     render :json => data
   end

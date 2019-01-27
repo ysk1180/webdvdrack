@@ -1,3 +1,39 @@
+<% if @h.present? %>
+  <div class='wrap'>
+    <span id='link-name'><i><%= @h_post.name.present? ? @h_post.name : '名無し' %>さんがシェアした映画</i>
+      <% if @h_post.twitter_id.present? %>
+        <a href="https://twitter.com/<%= @h_post.twitter_id %>" target="_blank"><i class="fa fa-twitter fa-lg twitter-icon"></i></a>
+      <% end %>
+    </span>
+    <div class='info'><i class="fa fa-info-circle fa-fw"></i>本はamazonへのリンクになっています</div>
+    <div class='view'>
+      <%= image_tag 'dvdrack.png', width: 315 %>
+      <span class="title_view">
+        <%= @h_post.title %>
+      </span>
+      <span class="view_img1">
+        <a href="<%= @h_post.url1 %>" target="_blank" id="view_url1">
+          <img src="<%= @h_post.image1 %>" id="view_image1" width="75px" class='book-body'>
+        </a>
+      </span>
+      <span class="view_img2">
+        <a href="<%= @h_post.url2 %>" target="_blank" id="view_url2">
+          <img src="<%= @h_post.image2 %>" id="view_image2" width="75px" class='book-body'>
+        </a>
+      </span>
+      <span class="view_img3">
+        <a href="<%= @h_post.url3 %>" target="_blank" id="view_url3">
+          <img src="<%= @h_post.image3 %>" id="view_image3" width="75px" class='book-body'>
+        </a>
+      </span>
+    </div>
+  </div>
+  <br>
+  <div id='you'>
+    <span><i>映画をシェアする</i></span>
+  </div>
+<% end %>
+
 <div class='wrap'>
   <div class="preview">
     <%= image_tag 'dvdrack.png', width: 315 %>
@@ -34,7 +70,7 @@
 </div>
 
 <div id='confirmation-button' style='display: none;'>
-  <button id="save-button"><i class="fa fa-check fa-fw"></i>DVDラックをシェアする</button>
+  <button id="save-button"><i class="fa fa-check fa-fw"></i>映画をシェアする</button>
 </div>
 
 <div class='info'><i class="fa fa-info-circle fa-fw"></i>タイトルの一部を入力し、選択してください</div>

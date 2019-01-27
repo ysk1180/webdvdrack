@@ -63,16 +63,28 @@ footer div{
   position: absolute;
   bottom: 90px;
   left: 80px;
+  cursor: pointer;
+}
+.delete1:hover {
+  opacity: 0.7;
 }
 .delete2{
   position: absolute;
   bottom: 90px;
   left: 175px;
+  cursor: pointer;
+}
+.delete2:hover {
+  opacity: 0.7;
 }
 .delete3{
   position: absolute;
   bottom: 90px;
   left: 270px;
+  cursor: pointer;
+}
+.delete3:hover {
+  opacity: 0.7;
 }
 .title_preview{
   position: absolute;
@@ -137,6 +149,13 @@ footer div{
 .modal-twitter{
   text-align: center;
 }
+.swal2-footer{
+  display: block !important;
+}
+.copy{
+  text-align: center;
+  margin: 10px 0 0 0;
+}
 
 .form-text{
   text-align: center;
@@ -153,4 +172,53 @@ footer div{
   cursor: pointer;
   padding-top: 7px;
   color: #A4A4A4;
+}
+
+.item{
+  display: table;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.item:hover{
+  opacity: .7;
+  text-decoration: none;
+}
+.item-img{
+  display: table-cell;
+}
+.item-title{
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 10px;
+}
+
+#save-button {
+  display: inline-block;
+  text-align: left;
+  background-image: linear-gradient(#eaeaea 0%, #c6c6c6 100%);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
+  color: #a5a5a5;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 1);
+  padding: 6px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+}
+#save-button:hover {
+  opacity: 0.7;
+}
+#confirmation-button {
+  text-align: center;
+}
+
+.twitter-icon{
+  color: #1CA1F2;
+}
+.twitter-icon:hover{
+  opacity: .7;
+  text-decoration: none;
 }

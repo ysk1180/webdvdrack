@@ -16,7 +16,7 @@
   function preview_image(preview_number, url, src, title){
     $(`#preview_image${preview_number}`).attr("src", src);
     $(`#preview_url${preview_number}`).attr("href", url);
-    $(`#img${preview_number}`).data("title", title);
+    $(`.img${preview_number}`).data("title", title);
   }
 
   $(".item").on("click", function () {
