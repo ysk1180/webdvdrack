@@ -94,6 +94,38 @@ footer div{
   color: white;
 }
 
+.view{
+  position: relative;
+  // margin: 10px;
+  display: inline-block;
+}
+.view-img1{
+  position: absolute;
+  bottom: 20px;
+  left: 25px;
+}
+.view-img2{
+  position: absolute;
+  bottom: 20px;
+  left: 120px;
+}
+.view-img3{
+  position: absolute;
+  bottom: 20px;
+  left: 215px;
+}
+.title_view{
+  position: absolute;
+  top: 5px;
+  left: 30px;
+  font-size: 20px;
+  color: white;
+}
+.book-body:hover{
+  opacity: .7;
+  text-decoration: none;
+}
+
 #loading {
   display: table;
   width: 100%;
@@ -222,4 +254,12 @@ footer div{
 .twitter-icon:hover{
   opacity: .7;
   text-decoration: none;
+}
+
+.who-share{
+  margin-top: 10px;
+}
+
+#you{
+  text-align: center;
 }

@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   def new
+    @h = params[:h]
+    @h_post = Post.find_by(h: @h) if @h.present?
   end
 
   def search

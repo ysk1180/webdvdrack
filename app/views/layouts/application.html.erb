@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Webdvdrack</title>
+    <title>映画シェア</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -16,6 +16,14 @@
 
     <%# モーダル %>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+    <%# Twitterカード %>
+    <% twitter_card = get_twitter_card_info(@h? @h: nil) %>
+    <meta name="twitter:card" content=<%=twitter_card[:card]%> />
+    <meta property="og:url" content=<%=twitter_card[:url]%> />
+    <meta property="og:title" content=<%=twitter_card[:title]%> />
+    <meta property="og:description" content=<%=twitter_card[:description]%> />
+    <meta property="og:image" content=<%=twitter_card[:image]%> />
   </head>
 
   <body>
