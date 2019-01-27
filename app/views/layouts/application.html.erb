@@ -8,11 +8,21 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+    <%# レスポンシブ対応 %>
+    <meta name="viewport" content="width=device-width">
+
     <%# モーダル %>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div>
+        <h1><a href="/" style="color: white;"><i class="fa fa-film fa-fw"></i>映画シェア</a></h1>
+      </div>
+    </header>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,6 +1,30 @@
 @import "bootstrap";
 @import "font-awesome";
 
+@font-face{
+  font-family: "smartfont";
+  src: font-url('smartfont.otf') format('truetype');
+}
+
+body {
+  background-size: 100% auto;
+  font-family: "smartfont";
+  background-color: #EDEDED;
+}
+
+header {
+  background-image: image-url("header.png");
+  padding: 10px 20px 100px 20px;
+  background-size: contain;
+  background-color: black;
+}
+header h1{
+  font-size: 25px;
+}
+
+.wrap{
+  text-align: center;
+}
 .preview{
   position: relative;
   margin: 10px;
@@ -41,7 +65,6 @@
   top: 5px;
   left: 30px;
   font-size: 20px;
-  font-weight: bold;
   color: white;
 }
 
@@ -99,4 +122,21 @@
 }
 .modal-twitter{
   text-align: center;
+}
+
+.form-text{
+  text-align: center;
+}
+
+.info {
+  color: #A4A4A4;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.search{
+  cursor: pointer;
+  padding-top: 7px;
+  color: #A4A4A4;
 }
