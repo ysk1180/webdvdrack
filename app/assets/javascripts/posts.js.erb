@@ -48,6 +48,8 @@ $(function(){
     $(`#img${preview_number}`).data("title", '');
     $(`.delete${preview_number}`).css("display", 'none');
     $('.dvd-name').css('display','');
+    // 後続の画像がある場合にズラす
+    if (preview_number === 3){ return }
     if ($(`#preview_image${preview_number + 1}`).attr('src') !== ''){
       $(`#preview_image${preview_number}`).attr("src", $(`#preview_image${preview_number + 1}`).attr('src'));
       $(`#preview_url${preview_number}`).attr("href", $(`#preview_url${preview_number + 1}`).attr('href'));
@@ -57,6 +59,7 @@ $(function(){
       $(`#preview_url${preview_number + 1}`).attr("href", '');
       $(`#img${preview_number + 1}`).data("title", '');
       $(`.delete${preview_number + 1}`).css("display", 'none');
+      if (preview_number === 2){ return }
       if ($(`#preview_image${preview_number + 2}`).attr('src') !== ''){
         $(`#preview_image${preview_number + 1}`).attr("src", $(`#preview_image${preview_number + 2}`).attr('src'));
         $(`#preview_url${preview_number + 1}`).attr("href", $(`#preview_url${preview_number + 2}`).attr('href'));
