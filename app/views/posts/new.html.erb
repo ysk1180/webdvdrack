@@ -122,6 +122,48 @@
   </div>
 <% end %>
 
+<div class='recent-share'>
+  <div>
+    <i class="fa fa-flag fa-fw"></i>最近シェアされた映画
+  </div>
+  <div>
+    <span class="info">今までに<%= @count %>回シェアされたよ</span>
+  </div>
+  <% @posts.each do |post| %>
+    <div class='wrap'>
+      <div class='who-share'>
+        <a href="https://moviesharesns.herokuapp.com/?h=<%= post.h %>" target="_blank" style='color: #2C3133;'>
+          <span class='link-name'><i><%= post.name.present? ? post.name : '名無し' %>さんがシェアした映画</i> </div>
+        </a>
+      <% if post.twitter_id.present? %>
+        <a href="https://twitter.com/<%= post.twitter_id %>" target="_blank"><i class="fa fa-twitter fa-lg twitter-icon"></i></a>
+      <% end %>
+        </span>
+        <div class='view'>
+          <%= image_tag 'dvdrack.png', width: 315 %>
+          <span class="title_view">
+            <%= post.title %>
+          </span>
+          <span class="view-img1">
+            <a href="<%= post.movies[0]&.url %>" target="_blank" id="view_url1">
+              <img src="<%= post.movies[0]&.image %>" id="view_image1" width="75px" class='book-body'>
+            </a>
+          </span>
+          <span class="view-img2">
+            <a href="<%= post.movies[1]&.url %>" target="_blank" id="view_url2">
+              <img src="<%= post.movies[1]&.image %>" id="view_image2" width="75px" class='book-body'>
+            </a>
+          </span>
+          <span class="view-img3">
+            <a href="<%= post.movies[2]&.url %>" target="_blank" id="view_url3">
+          <img src="<%= post.movies[2]&.image %>" id="view_image3" width="75px" class='book-body'>
+        </a>
+      </span>
+    </div>
+  </div>
+  <% end %>
+</div>
+
 <script>
   // 最初にタイトルが表示されるように
   var content = $("#title").val();
