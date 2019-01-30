@@ -2,8 +2,17 @@ class PostsController < ApplicationController
   def new
     @h = params[:h]
     @h_post = Post.find_by(h: @h) if @h.present?
-    @posts = Post.last(3)
+    @posts = Post.last(3).reverse
     @count = Post.all.count
+    if @h_post.present?
+      posts = []
+      movies = @h_post.movies
+      posts.concat(movies[0].posts)
+      posts.concat(movies[1].posts) if movies[1].present?
+      posts.concat(movies[2].posts) if movies[2].present?
+      posts.delete(@h_post)
+      @same_movie_posts = posts.uniq.shuffle!.last(5)
+    end
   end
 
   def search
@@ -13,6 +22,10 @@ class PostsController < ApplicationController
 
   def make
     generate(to_uploaded(params[:imgData]), params[:hash])
+    movie1 = ''
+    movie2 = ''
+    movie3 =''
+    post = ''
     ActiveRecord::Base.transaction do
       movie1 = Movie.find_or_create_by(title: params[:title1], url: params[:url1], image: params[:image1])
       movie2 = Movie.find_or_create_by(title: params[:title2], url: params[:url2], image: params[:image2]) if params[:title2].present?
