@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   def new
     @h = params[:h]
     @h_post = Post.find_by(h: @h) if @h.present?
-    @posts = Post.last(3).reverse
+    @posts = Post.last(5).reverse
     @count = Post.all.count
     if @h_post.present?
       posts = same_movies(@h_post)
