@@ -5,12 +5,7 @@ class PostsController < ApplicationController
     @posts = Post.last(3).reverse
     @count = Post.all.count
     if @h_post.present?
-      posts = []
-      movies = @h_post.movies
-      posts.concat(movies[0].posts)
-      posts.concat(movies[1].posts) if movies[1].present?
-      posts.concat(movies[2].posts) if movies[2].present?
-      posts.delete(@h_post)
+      posts = same_movies(@h_post)
       @same_movie_posts = posts.uniq.shuffle!.last(5)
     end
   end
@@ -35,11 +30,22 @@ class PostsController < ApplicationController
       PostMovie.create!(post_id: post.id, movie_id: movie2.id) if params[:title2].present?
       PostMovie.create!(post_id: post.id, movie_id: movie3.id) if params[:title3].present?
     end
-    data = []
+    same_movies_count = same_movies(post).count
+    data = [same_movies_count]
     render :json => data
   end
 
   private
+
+  def same_movies(post)
+    posts = []
+    movies = post.movies
+    posts.concat(movies[0].posts)
+    posts.concat(movies[1].posts) if movies[1].present?
+    posts.concat(movies[2].posts) if movies[2].present?
+    posts.delete(post)
+    posts
+  end
 
   def search_by_amazon(keyword)
     # デバッグ出力用/trueで出力

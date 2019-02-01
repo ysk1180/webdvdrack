@@ -136,11 +136,16 @@ $(function(){
             }
           }
         }
+        if (data[0] === 0) {
+          var text = '↓Let\'s share↓'
+        } else {
+          var text = `あなたと同じ映画をシェアした方が${data[0]}人います！\nシェアされたURLから見ることができます。`
+        }
         removeLoading();
         Swal.fire({
           type: 'success',
           // title: 'Let\'s BigTweet!',
-          text: '本棚完成！\n↓Let\'s share! ↓',
+          text: text,
           imageUrl: `https://s3-ap-northeast-1.amazonaws.com/webdvdrack-production/images/${hash}.png`,
           imageWidth: 315,
           imageAlt: 'Custom image',
