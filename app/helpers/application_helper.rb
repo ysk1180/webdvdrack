@@ -9,7 +9,7 @@ module ApplicationHelper
       twitter_card[:title] = "#{name}さんがシェアした映画"
     else
       twitter_card[:url] = 'https://moviesharesns.herokuapp.com/'
-      twitter_card[:image] = 'https://s3-ap-northeast-1.amazonaws.com/webdvdrack-production/images/30mlju5y.png'
+      twitter_card[:image] = 'https://s3-ap-northeast-1.amazonaws.com/webdvdrack-production/images/dce74ty4.png'
       twitter_card[:title] = '映画シェア'
     end
     twitter_card[:card] = 'summary_large_image'
