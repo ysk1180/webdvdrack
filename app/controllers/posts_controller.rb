@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @count = Post.all.count
     if @h_post.present?
       posts = same_movies(@h_post)
-      @same_movie_posts = posts.uniq.shuffle!.last(5)
+      @same_movie_posts = posts.shuffle!.last(5)
     end
   end
 
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
     posts.concat(movies[1].posts) if movies[1].present?
     posts.concat(movies[2].posts) if movies[2].present?
     posts.delete(post)
-    posts
+    posts.uniq
   end
 
   def search_by_amazon(keyword)
