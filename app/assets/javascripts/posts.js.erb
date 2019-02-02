@@ -104,6 +104,11 @@ $(function(){
     $(`.delete2`).css("display", 'none');
     $(`.delete3`).css("display", 'none');
 
+    // TwitterIDの先頭に@がついてたら取る
+    if (twitter_id.slice(0, 1) === '@'){
+      twitter_id = twitter_id.slice(1);
+    }
+
     // 生成する文字列の長さ
     var l = 8;
     // 生成する文字列に含める文字セット
