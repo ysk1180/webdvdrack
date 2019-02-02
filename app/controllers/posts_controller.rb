@@ -68,6 +68,7 @@ class PostsController < ApplicationController
     # 検索結果から本のタイトル,画像URL, 詳細ページURLの取得
     dvds = []
     results.items.each do |item|
+      next if adult?(item)
       dvd = {
         title: item.get('ItemAttributes/Title'),
         image: item.get('LargeImage/URL'),
@@ -76,6 +77,10 @@ class PostsController < ApplicationController
       dvds << dvd
     end
     dvds
+  end
+
+  def adult?(item)
+    item.get('ItemAttributes/IsAdultProduct') == '1'
   end
 
   def to_uploaded(base64_param)
