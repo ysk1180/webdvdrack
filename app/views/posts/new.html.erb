@@ -2,11 +2,11 @@
   <div class='wrap'>
     <div class='who-share'>
       <span class='link-name'><i><%= @h_post.name.present? ? @h_post.name : '名無し' %>さんがシェアした映画</i>
+        <% if @h_post.twitter_id.present? %>
+          <a href="https://twitter.com/<%= @h_post.twitter_id %>" target="_blank"><i class="fa fa-twitter fa-lg twitter-icon"></i></a>
+        <% end %>
+      </span>
     </div>
-      <% if @h_post.twitter_id.present? %>
-        <a href="https://twitter.com/<%= @h_post.twitter_id %>" target="_blank"><i class="fa fa-twitter fa-lg twitter-icon"></i></a>
-      <% end %>
-    </span>
     <div class='info'><i class="fa fa-info-circle fa-fw"></i>本はamazonへのリンクになっています</div>
     <div class='view'>
       <%= image_tag 'dvdrack.png', width: 315 %>
