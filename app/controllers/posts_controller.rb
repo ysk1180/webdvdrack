@@ -35,6 +35,11 @@ class PostsController < ApplicationController
     render :json => data
   end
 
+  def index
+    @posts = Post.all.order('created_at desc').page(params[:page]).per(20)
+    @count = Post.all.count
+  end
+
   private
 
   def same_movies(post)

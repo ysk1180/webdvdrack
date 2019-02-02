@@ -52,3 +52,5 @@ gem "font-awesome-rails"
 gem 'rack-cors', require: 'rack/cors'
 
 gem 'google-analytics-rails'
+
+gem 'kaminari'

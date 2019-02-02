@@ -272,3 +272,26 @@ footer div{
 .same{
 margin: 10px 0 40px 0;
 }
+
+.page-link{
+  background-color: #2C3133;
+  color: #D8D8D8;
+  border-color: #D8D8D8;
+}
+.page-link:hover{
+  background-color: #2C3133;
+}
+.pagination{
+  justify-content: center;
+  margin-top: 20px;
+}
+.index-title{
+  text-align: center;
+  font-size: 22px;
+  margin: 10px 0;
+}
+
+.see-more{
+  text-align: center;
+  margin: 20px
+}
