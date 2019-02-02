@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   def new
     @h = params[:h]
     @h_post = Post.find_by(h: @h) if @h.present?
+    @h = nil if @h_post.nil?
     @posts = Post.last(5).reverse
     @count = Post.all.count
     if @h_post.present?
