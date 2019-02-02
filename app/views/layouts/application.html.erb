@@ -24,6 +24,9 @@
     <meta property="og:title" content=<%=twitter_card[:title]%> />
     <meta property="og:description" content=<%=twitter_card[:description]%> />
     <meta property="og:image" content=<%=twitter_card[:image]%> />
+
+    <%# Global site tag (gtag.js) - Google Analytics %>
+    <%= analytics_init if Rails.env.production? %>
   </head>
 
   <body>
