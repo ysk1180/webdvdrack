@@ -55,7 +55,7 @@ class PostsController < ApplicationController
 
   def search_by_amazon(keyword)
     # デバッグ出力用/trueで出力
-    Amazon::Ecs.debug = true
+    Amazon::Ecs.debug = false
 
     # AmazonAPIで検索
     results = Amazon::Ecs.item_search(
